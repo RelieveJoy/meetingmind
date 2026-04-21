@@ -1,0 +1,26 @@
+# ============================================
+# 测试环境配置
+# ============================================
+server:
+  port: 8080
+
+# Whisper 服务配置（mock）
+whisper:
+  host: localhost
+  port: 5000
+  base-url: http://localhost:5000
+  timeout: 30
+
+# Ollama 服务配置（mock）
+ollama:
+  host: localhost
+  port: 11434
+  base-url: http://localhost:11434
+  model: qwen:7b
+  timeout: 30
+
+# 日志配置
+logging:
+  level:
+    root: WARN
+    com.feishu.miji: DEBUG

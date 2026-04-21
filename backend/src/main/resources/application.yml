@@ -1,0 +1,171 @@
+# =============================================
+# 自用版飞书妙记 - Spring Boot 配置文件
+# =============================================
+
+server:
+  port: 8080
+  servlet:
+    context-path: /
+
+spring:
+  application:
+    name: voice-note-backend
+  servlet:
+    multipart:
+      max-file-size: 100MB
+      max-request-size: 100MB
+  jackson:
+    date-format: yyyy-MM-dd'T'HH:mm:ssXXX
+    time-zone: Asia/Shanghai
+    serialization:
+      write-dates-as-timestamps: false
+
+# =============================================
+# Whisper 服务配置
+# =============================================
+whisper:
+  enabled: true
+  # Whisper API 地址 (本地部署)
+  base-url: http://localhost:8000
+  # 模型名称: tiny/base/small/medium/large
+  model: small
+  # 默认语言
+  language: zh
+  # 请求超时时间(秒)
+  timeout: 60
+  # 最大并发处理数
+  max-concurrent: 2
+
+# =============================================
+# Ollama 服务配置
+# =============================================
+ollama:
+  enabled: true
+  # Ollama API 地址
+  base-url: http://localhost:11434
+  # 文本优化模型
+  optimize-model: chatglm3:6b-128k
+  # 总结生成模型
+  summary-model: chatglm3:6b-128k
+  # 请求超时时间(秒)
+  timeout: 120
+  # GPU加速
+  gpu-enabled: true
+
+# =============================================
+# 音频处理配置
+# =============================================
+audio:
+  # 音频采样率
+  sample-rate: 16000
+  # 音频通道数
+  channels: 1
+  # 音频格式
+  format: PCM_16BIT
+  # 每帧发送间隔(毫秒)
+  frame-interval: 250
+  # 分段优化间隔(秒)
+  segment-interval: 40
+  # 是否启用GZIP压缩
+  gzip-compression: true
+
+# =============================================
+# WebSocket 配置
+# =============================================
+websocket:
+  # WebSocket 端点路径
+  endpoint: /ws/voice
+  # 心跳间隔(秒)
+  heartbeat-interval: 30
+  # 连接超时时间(秒)
+  connection-timeout: 60
+  # 最大消息大小(MB)
+  max-message-size: 10
+
+# =============================================
+# 分段优化服务配置
+# =============================================
+segment:
+  # 分段时长（秒）
+  duration: 40
+  # 首次执行延迟（秒）
+  initial-delay: 5
+  # 最大并发会话数
+  max-concurrent-sessions: 10
+
+# =============================================
+# 文本缓冲配置
+# =============================================
+buffer:
+  # 最大缓冲段数
+  max-segments: 3
+  # 最大等待时间（秒）
+  max-wait-seconds: 60
+
+# =============================================
+# 实时总结配置
+# =============================================
+summary:
+  # 触发条件
+  trigger:
+    time-interval: 120        # 时间间隔（秒）
+    text-threshold: 500       # 文本量阈值（字数）
+    min-interval: 30          # 最小触发间隔（秒）
+    min-text-length: 100      # 最小文本量（字数）
+
+  # 模型配置
+  model:
+    name: "chatglm3:6b-128k"            # 使用的模型
+    timeout: 60                # 超时时间（秒）
+    temperature: 0.7           # 生成温度
+
+  # 上下文管理
+  context:
+    max-history-summaries: 5   # 最大历史摘要数
+    max-context-token: 2000    # 最大上下文token估算
+    compression-ratio: 0.3     # 压缩比例
+
+  # 持久化配置
+  persistence:
+    enabled: true              # 是否启用持久化
+    base-path: "./data/summaries"  # 存储路径
+    auto-save: true            # 自动保存
+
+# =============================================
+# 文档生成配置
+# =============================================
+document:
+  # 基础输出目录
+  base-dir: ./outputs
+  # 文档目录
+  doc-dir: docs
+  # 音频目录
+  audio-dir: audio
+  # 模板目录
+  template-dir: templates
+  # 日期格式
+  date-format: yyyy-MM-dd
+  # 最大文件大小(MB)
+  max-file-size: 100
+  # 批量压缩大小(MB)
+  batch-zip-size: 50
+  # 模板配置
+  template:
+    default-template: full_meeting
+    custom-template-dir: custom
+  # 导出配置
+  export:
+    default-format: markdown
+    include-timestamp: true
+    include-audio: true
+
+# =============================================
+# 日志配置
+# =============================================
+logging:
+  level:
+    root: INFO
+    com.feishu.miji: DEBUG
+    org.springframework.web.socket: DEBUG
+  pattern:
+    console: "%d{yyyy-MM-dd HH:mm:ss} [%thread] %-5level %logger{36} - %msg%n"
