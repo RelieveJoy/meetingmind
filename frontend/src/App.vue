@@ -1,7 +1,7 @@
 <template>
   <div class="app">
     <header class="app-header">
-      <h1>飞书妙记 - 录音控制</h1>
+      <h1>MeetingMind - 录音控制</h1>
       <p class="app-subtitle">实时音频转写与AI优化</p>
     </header>
     <main class="app-main">
@@ -34,7 +34,7 @@
       </aside>
     </main>
     <footer class="app-footer">
-      <p>© 2026 飞书妙记 - 自用版</p>
+      <p>© 2026 MeetingMind</p>
     </footer>
   </div>
 </template>

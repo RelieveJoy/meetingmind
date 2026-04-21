@@ -1,5 +1,5 @@
 # =============================================
-# 自用版飞书妙记 - Spring Boot 配置文件
+# MeetingMind - Spring Boot 配置文件
 # =============================================
 
 server:
@@ -165,7 +165,9 @@ document:
 logging:
   level:
     root: INFO
-    com.feishu.miji: DEBUG
+    com.meetingmind: DEBUG
     org.springframework.web.socket: DEBUG
   pattern:
     console: "%d{yyyy-MM-dd HH:mm:ss} [%thread] %-5level %logger{36} - %msg%n"
+
+

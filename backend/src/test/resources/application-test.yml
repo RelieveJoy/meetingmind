@@ -23,4 +23,6 @@ ollama:
 logging:
   level:
     root: WARN
-    com.feishu.miji: DEBUG
+    com.meetingmind: DEBUG
+
+
